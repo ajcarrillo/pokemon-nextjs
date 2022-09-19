@@ -25,10 +25,9 @@ export const CustomNavbar: FC = () => {
         </NextLink>
       </Navbar.Brand>
       <Navbar.Content hideIn="xs">
-        <Navbar.Link
-          isActive
-          href="#"
-        >Favoritos</Navbar.Link>
+        <NextLink href="/favorites" passHref>
+          <Link block color="secondary">Favoritos</Link>
+        </NextLink>
       </Navbar.Content>
     </Navbar>
   )
