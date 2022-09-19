@@ -1,6 +1,7 @@
-import { Navbar, Text } from "@nextui-org/react"
+import { Link, Navbar, Text } from "@nextui-org/react"
 import { FC } from "react"
 import { PokemonLogo } from "./PokemonLogo"
+import NextLink from "next/link"
 
 export const CustomNavbar: FC = () => {
 
@@ -10,14 +11,18 @@ export const CustomNavbar: FC = () => {
       variant={"sticky"}
     >
       <Navbar.Brand>
-        <PokemonLogo/>
-        <Text
-          b
-          color="inherit"
-          hideIn="xs"
-        >
-          Pokémon Static
-        </Text>
+        <PokemonLogo />
+        <NextLink href="/" passHref>
+          <Link>
+            <Text
+              b
+              color="inherit"
+              hideIn="xs"
+            >
+              Pokémon Static
+            </Text>
+          </Link>
+        </NextLink>
       </Navbar.Brand>
       <Navbar.Content hideIn="xs">
         <Navbar.Link
