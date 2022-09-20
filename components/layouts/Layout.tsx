@@ -7,7 +7,12 @@ type Props = {
   children: React.ReactNode
 }
 
+const origin = (typeof window === "undefined") ? "" : window.location.origin
+
 export const Layout: FC<Props> = ({ title, children }) => {
+
+
+
   return (
     <>
       <Head>
@@ -18,14 +23,17 @@ export const Layout: FC<Props> = ({ title, children }) => {
         />
         <meta
           name="description"
-          content="Información del pokémon:"
+          content={`Información sobre el pokémon ${title}`}
         />
         <meta
           name="keywords"
-          content="pokemon, pokedex"
+          content={`pokemon, pokedex, ${title}`}
         />
+        <meta property="og:title" content={`Información sobre ${title}`} />
+        <meta property="og:description" content={`Esta es la página sobre ${title}`} />
+        <meta property="og:image" content={`${origin}/img/banner.png`} />
       </Head>
-      <CustomNavbar/>
+      <CustomNavbar />
       <main>
         {children}
       </main>
