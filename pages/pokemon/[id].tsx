@@ -5,6 +5,7 @@ import { pokeApi } from "../../api"
 import { Button, Card, Container, Grid, Text, Image } from "@nextui-org/react"
 import { localFavorites } from "../../utils"
 import { useState } from "react"
+import confetti from "canvas-confetti"
 
 interface Props {
   pokemon: Pokemon
@@ -17,6 +18,17 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
   const onToggleFavorite = () => {
     localFavorites.toggleFavorite(pokemon.id)
     setIsFavorite(!isFavorite)
+
+    if (isFavorite) return;
+
+    confetti({
+      zIndex: 9999,
+      particleCount: 100,
+      spread: 160,
+      angle: -100,
+      origin: { x: 1, y: 0 }
+    })
+
   }
 
   return (
