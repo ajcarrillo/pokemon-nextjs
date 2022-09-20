@@ -6,6 +6,7 @@ import { Layout } from "../../components/layouts"
 import { Pokemon, PokemonListResponse } from "../../interfaces"
 import { localFavorites } from "../../utils"
 import confetti from "canvas-confetti"
+import { getPokemonInfo } from '../../utils/getPokemonInfo';
 
 interface Props {
   pokemon: Pokemon
@@ -87,16 +88,26 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
 
   return {
     paths,
-    fallback: false,
+    fallback: 'blocking',
   }
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { name } = params as { name: string }
-  const { data } = await pokeApi.get<Pokemon>(`/pokemon/${name}`)
+  const pokemon = await getPokemonInfo(name)
+
+  if (!pokemon) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
 
   return {
-    props: { pokemon: data },
+    props: { pokemon },
+    revalidate: 86400
   }
 }
 
